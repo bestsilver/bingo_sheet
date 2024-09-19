@@ -1,0 +1,81 @@
+html, body {
+	height: 100%; /* 브라우저 창의 전체 높이를 사용하도록 설정 */
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	width: 100%;
+	height: 100%; /* 부모 요소의 높이와 너비를 100%로 설정 */
+	display: flex; /* Flexbox를 사용하여 중앙 정렬 */
+	justify-content: center;
+	align-items: center;
+}
+
+#bingo-card {
+	width: 100%; /* 카드의 너비를 최대로 설정 */
+	max-width: 1000px; /* 최대 너비 제한 */
+	aspect-ratio: 1; /* 너비와 높이의 비율을 1:1로 설정 */
+}
+.card-body {
+	flex: 1; /* 카드 내용이 카드 전체 공간을 채우도록 설정 */
+	display: flex;
+	flex-direction: column;
+}
+
+#bingo-table {
+	width: 100%; /* 테이블의 전체 너비 */
+	table-layout: fixed; /* 테이블 레이아웃 고정 */
+	--size: 3;
+}
+
+#bingo-table tr {
+	height: calc(100% / var(--size));
+}
+
+
+#bingo-table, #bingo-table tr, #bingo-table td {
+	flex-grow: 1;
+}
+
+#bingo-table td {
+	position: relative; /* 상대적 위치 설정 */
+	aspect-ratio: 1; /* 너비와 높이 비율을 1:1로 유지 */
+	text-align: center;
+	width: calc(100% / var(--size));
+	height: calc(100% / var(--size));
+	box-sizing: border-box; 
+	display: table-cell;
+	vertical-align: middle; 
+}
+
+input {
+	width: 100%; /* 입력 필드의 너비를 셀의 너비와 동일하게 */
+	height: auto; /* 입력 필드의 높이를 자동으로 조정 */
+	position: absolute; /* 절대 위치 설정 */
+	top: 0; /* 상단 정렬 */
+	left: 0; /* 좌측 정렬 */
+	right: 0; /* 우측 정렬 */
+	bottom: 0; /* 하단 정렬 */
+	border: none; /* 테두리 제거 */
+	outline: none; /* 포커스 테두리 제거 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	padding: 0; /* 패딩 제거 */
+	box-sizing: border-box; /* 박스 크기 계산 방식 설정 */
+}
+
+#bingo-table td.x-marked::before,
+#bingo-table td.x-marked::after {
+	content: ''; /* 내용 없음 */
+	position: absolute; /* 절대 위치 설정 */
+	top: 50%; /* 상단에서 50% 위치 */
+	left: 50%; /* 좌측에서 50% 위치 */
+	width: 120%; /* 너비 120% */
+	height: 2px; /* 높이 2px */
+	background-color: red; /* 배경색 빨간색 */
+	transform: translate(-50%, -50%) rotate(45deg); /* 회전 45도 */
+}
+
+#bingo-table td.x-marked::after {
+	transform: translate(-50%, -50%) rotate(-45deg); /* 회전 -45도 */
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bingo</title>
+	<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/js/fontawesome.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+	<script src="./main.js"></script>
+	<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+	<div class="container">
+		<div class="card" id="bingo-card">
+			<div class="card-body">
+				<select class="form-select" id="bingo-select">
+					<option value="3">3X3</option>
+					<option value="4">4X4</option>
+					<option value="5">5X5</option>
+				</select>
+				<table class="table table-bordered mt-3" id="bingo-table" style="--size: 3;">
+					<tbody>
+						<tr>
+							<td class="x-marked"></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+	
+				</table>
+				
+			</div>
+		  </div>
+	</div>
+
+</body>
+</html>

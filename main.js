@@ -24,8 +24,8 @@ function updateTable(size) {
 			td.addEventListener('dblclick', function() {
                 this.classList.toggle('x-marked'); // "X" 그리기 토글
             });
-            
-            setupDoubleClick(td);
+
+            setupDoubleTap(td);
             tr.appendChild(td);
         }
         tbody.appendChild(tr);
@@ -54,21 +54,20 @@ function makeEditable(td) {
     input.focus(); // 자동으로 입력 필드에 포커스
 }
 
-function setupDoubleClick(td) {
-    let lastTap = 0;
-    td.addEventListener('touchend', function(event) {
+function setupDoubleTap(td) {
+    let lastClickTime = 0;
+    const doubleClickThreshold = 300; // 더블 클릭 감지를 위한 시간 임계값
+
+    td.addEventListener('click', function(event) {
         const currentTime = new Date().getTime();
-        const tapLength = currentTime - lastTap;
-        clearTimeout(timeout);
-        if (tapLength < 500 && tapLength > 0) {
-            this.classList.toggle('x-marked'); // 더블 탭 실행 로직
-            event.preventDefault();
+        if (currentTime - lastClickTime < doubleClickThreshold) {
+            // 더블 클릭으로 간주
+            this.classList.toggle('x-marked');
+            lastClickTime = 0; // 더블 클릭 후 타이머 리셋
         } else {
-            timeout = setTimeout(function() {
-                console.log('Single Tap'); // 단일 탭 로직
-                clearTimeout(timeout);
-            }, 500);
+            // 단일 클릭으로 간주
+            lastClickTime = currentTime;
+            // 더블 클릭이 아닌 경우 필요한 로직을 실행
         }
-        lastTap = currentTime;
     });
 }

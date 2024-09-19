@@ -24,7 +24,8 @@ function updateTable(size) {
 			td.addEventListener('dblclick', function() {
                 this.classList.toggle('x-marked'); // "X" 그리기 토글
             });
-
+            
+            setupDoubleClick(td);
             tr.appendChild(td);
         }
         tbody.appendChild(tr);
@@ -51,4 +52,23 @@ function makeEditable(td) {
     td.innerHTML = ''; // 기존 셀 내용 삭제
     td.appendChild(input); // 입력 필드 삽입
     input.focus(); // 자동으로 입력 필드에 포커스
+}
+
+function setupDoubleClick(td) {
+    let lastTap = 0;
+    td.addEventListener('touchend', function(event) {
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        clearTimeout(timeout);
+        if (tapLength < 500 && tapLength > 0) {
+            this.classList.toggle('x-marked'); // 더블 탭 실행 로직
+            event.preventDefault();
+        } else {
+            timeout = setTimeout(function() {
+                console.log('Single Tap'); // 단일 탭 로직
+                clearTimeout(timeout);
+            }, 500);
+        }
+        lastTap = currentTime;
+    });
 }

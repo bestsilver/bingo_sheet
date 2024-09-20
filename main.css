@@ -49,7 +49,7 @@ html, body {
 	vertical-align: middle; 
 }
 
-input {
+#bingo-table input {
 	width: 100%; /* 입력 필드의 너비를 셀의 너비와 동일하게 */
 	height: auto; /* 입력 필드의 높이를 자동으로 조정 */
 	position: absolute; /* 절대 위치 설정 */

@@ -16,6 +16,20 @@
 	<div class="container">
 		<div class="card" id="bingo-card">
 			<div class="card-body">
+				<div class="row">
+					<div class="col">
+						<label class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" checked="" id="edit-mode">
+							<span class="form-check-label">Edit Mode</span>
+						</label>
+					</div>
+					<div class="col-auto">
+						<lable onclick="clearTable()">
+							<a href="#">clear</a>
+						</lable>
+					</div>
+				</div>
+
 				<select class="form-select" id="bingo-select">
 					<option value="3">3X3</option>
 					<option value="4">4X4</option>

@@ -18,14 +18,13 @@ function updateTable(size) {
             const td = document.createElement('td');
 
             td.addEventListener('click', function() {
-                makeEditable(this);
+                let isEditMode = document.getElementById('edit-mode')
+                if (isEditMode.checked) {
+                    makeEditable(this);
+                } else {
+                    this.classList.toggle('x-marked'); // "X" 그리기 토글
+                }
             });
-
-			td.addEventListener('dblclick', function() {
-                this.classList.toggle('x-marked'); // "X" 그리기 토글
-            });
-
-            setupDoubleTap(td);
             tr.appendChild(td);
         }
         tbody.appendChild(tr);
@@ -54,20 +53,9 @@ function makeEditable(td) {
     input.focus(); // 자동으로 입력 필드에 포커스
 }
 
-function setupDoubleTap(td) {
-    let lastClickTime = 0;
-    const doubleClickThreshold = 300; // 더블 클릭 감지를 위한 시간 임계값
-
-    td.addEventListener('click', function(event) {
-        const currentTime = new Date().getTime();
-        if (currentTime - lastClickTime < doubleClickThreshold) {
-            // 더블 클릭으로 간주
-            this.classList.toggle('x-marked');
-            lastClickTime = 0; // 더블 클릭 후 타이머 리셋
-        } else {
-            // 단일 클릭으로 간주
-            lastClickTime = currentTime;
-            // 더블 클릭이 아닌 경우 필요한 로직을 실행
-        }
-    });
+function clearTable() {
+    const table = document.getElementById('bingo-table');
+    const style = getComputedStyle(table);
+    const size = style.getPropertyValue('--size').trim(); 
+    updateTable(size)
 }

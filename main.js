@@ -25,21 +25,24 @@ function updateTable(size) {
             td.addEventListener('keydown', function(event) {
                 if (event.key === "Enter") {
                     event.preventDefault(); // 기본 Enter 키 동작 방지
-                    let currentIndex = parseInt(this.getAttribute('data-index'), 0); // 현재 td의 인덱스
 
-                    let nextIndex = currentIndex + 1; // 다음 td의 인덱스
-                    if (nextIndex >= size*size) {
-                        nextIndex = 0
-                    }
+                    setTimeout(() => {
+                        let currentIndex = parseInt(this.getAttribute('data-index'), 0); // 현재 td의 인덱스
 
-                    let nextTd = document.querySelector(`#bingo-table td[data-index="${nextIndex}"]`); // 다음 td 선택
-                    if (nextTd) {
-                        const clickEvent = new Event('click');
-                        nextTd.dispatchEvent(clickEvent);
-                    } else {
-                        // 다음 td가 없는 경우 처리, 예를 들면 포커스 초기화
-                        document.querySelector('#bingo-table td[data-index="0"]').focus();
-                    }
+                        let nextIndex = currentIndex + 1; // 다음 td의 인덱스
+                        if (nextIndex >= size*size) {
+                            nextIndex = 0
+                        }
+    
+                        let nextTd = document.querySelector(`#bingo-table td[data-index="${nextIndex}"]`); // 다음 td 선택
+                        if (nextTd) {
+                            makeEditable(nextTd);
+                        } else {
+                            // 다음 td가 없는 경우 처리, 예를 들면 포커스 초기화
+                            document.querySelector('#bingo-table td[data-index="0"]').focus();
+                        }
+                    }, 300);
+ 
                 }
             });
 

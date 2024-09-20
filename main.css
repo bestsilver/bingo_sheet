@@ -14,7 +14,6 @@ html, body {
 
 #bingo-card {
 	width: 100%; /* 카드의 너비를 최대로 설정 */
-	margin: 5%;
 	max-width: 1000px; /* 최대 너비 제한 */
 	aspect-ratio: 1;
 }

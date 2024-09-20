@@ -11,20 +11,38 @@ function updateTable(size) {
 	table.style.setProperty('--size', size);
     const tbody = table.querySelector('tbody');
     tbody.innerHTML = ''; // 테이블 내용을 지웁니다.
+    let tdIndex = 0;
 
     for (let i = 0; i < size; i++) {
         const tr = document.createElement('tr');
         for (let j = 0; j < size; j++) {
             const td = document.createElement('td');
+            td.setAttribute('tabindex', '0'); // 포커스 가능하도록 설정
+            td.setAttribute('data-index', tdIndex++);
 
-            td.addEventListener('click', function() {
-                let isEditMode = document.getElementById('edit-mode')
-                if (isEditMode.checked) {
-                    makeEditable(this);
-                } else {
-                    this.classList.toggle('x-marked'); // "X" 그리기 토글
+            td.addEventListener('click', handleClickTd);
+
+            td.addEventListener('keydown', function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); // 기본 Enter 키 동작 방지
+                    let currentIndex = parseInt(this.getAttribute('data-index'), 0); // 현재 td의 인덱스
+
+                    let nextIndex = currentIndex + 1; // 다음 td의 인덱스
+                    if (nextIndex >= size*size) {
+                        nextIndex = 0
+                    }
+
+                    let nextTd = document.querySelector(`#bingo-table td[data-index="${nextIndex}"]`); // 다음 td 선택
+                    if (nextTd) {
+                        const clickEvent = new Event('click');
+                        nextTd.dispatchEvent(clickEvent);
+                    } else {
+                        // 다음 td가 없는 경우 처리, 예를 들면 포커스 초기화
+                        document.querySelector('#bingo-table td[data-index="0"]').focus();
+                    }
                 }
             });
+
             tr.appendChild(td);
         }
         tbody.appendChild(tr);
@@ -58,4 +76,13 @@ function clearTable() {
     const style = getComputedStyle(table);
     const size = style.getPropertyValue('--size').trim(); 
     updateTable(size)
+}
+
+function handleClickTd(event) {
+    let isEditMode = document.getElementById('edit-mode');
+    if (isEditMode.checked) {
+        makeEditable(this); // 편집 모드가 활성화된 경우, 편집 가능하게 변경
+    } else {
+        this.classList.toggle('x-marked'); // "X" 그리기 토글
+    }
 }

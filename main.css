@@ -14,8 +14,9 @@ html, body {
 
 #bingo-card {
 	width: 100%; /* 카드의 너비를 최대로 설정 */
+	margin: 5%;
 	max-width: 1000px; /* 최대 너비 제한 */
-	aspect-ratio: 1; /* 너비와 높이의 비율을 1:1로 설정 */
+	aspect-ratio: 1;
 }
 .card-body {
 	flex: 1; /* 카드 내용이 카드 전체 공간을 채우도록 설정 */
@@ -64,18 +65,22 @@ html, body {
 	box-sizing: border-box; /* 박스 크기 계산 방식 설정 */
 }
 
-#bingo-table td.x-marked::before,
-#bingo-table td.x-marked::after {
-	content: ''; /* 내용 없음 */
-	position: absolute; /* 절대 위치 설정 */
-	top: 50%; /* 상단에서 50% 위치 */
-	left: 50%; /* 좌측에서 50% 위치 */
-	width: 120%; /* 너비 120% */
-	height: 2px; /* 높이 2px */
-	background-color: red; /* 배경색 빨간색 */
-	transform: translate(-50%, -50%) rotate(45deg); /* 회전 45도 */
+#bingo-table td.x-marked {
+	background-color: #f5dcdd;
+	opacity : 0.5;
 }
 
-#bingo-table td.x-marked::after {
-	transform: translate(-50%, -50%) rotate(-45deg); /* 회전 -45도 */
+.flex-container {
+    display: flex;            /* Flexbox 레이아웃 활성화 */
+    align-items: center;      /* 수직 방향 중앙 정렬 */
+    justify-content: space-between; /* 자식 요소들 사이에 균등 간격 */
+    padding: 10px;            /* 패딩 설정 */
+}
+
+.flex-item {
+    flex-grow: 1;             /* Flex 아이템이 가능한 공간을 채움 */
+}
+
+.flex-item-auto {
+    flex-grow: 0;             /* 필요한 만큼의 공간만 사용 */
 }

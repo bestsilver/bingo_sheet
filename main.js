@@ -71,7 +71,7 @@ function makeEditable(td) {
 
     td.innerHTML = ''; // 기존 셀 내용 삭제
     td.appendChild(input); // 입력 필드 삽입
-    //input.focus(); // 자동으로 입력 필드에 포커스
+    input.focus(); // 자동으로 입력 필드에 포커스
 }
 
 function clearTable() {
